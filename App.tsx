@@ -1,56 +1,63 @@
-import {Text, View} from 'react-native';
+import {Dimensions, StatusBar, StyleSheet, useColorScheme, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Icon} from '@rneui/themed';
+import {ColorScheme} from './src/colorScheme';
+import {darkTheme, lightTheme} from './src/theme';
+import MapView from 'react-native-maps';
 
-function HomeScreen() {
+// enableLatestRenderer();
+
+function Test() {
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+    },
+    map: {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height - 74,
+    },
+  });
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
+    <View style={styles.container}>
+      <MapView style={styles.map} />
     </View>
   );
 }
 
-function Test() {
-  return <></>;
-}
-
 const App = () => {
+  const scheme = useColorScheme();
   const Tab = createBottomTabNavigator();
+  const selectedTheme = scheme === ColorScheme.LIGHT ? lightTheme : darkTheme;
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
+      <NavigationContainer theme={selectedTheme}>
+        <StatusBar />
         <Tab.Navigator
           initialRouteName="Feed"
           screenOptions={{
             headerShown: false,
-            tabBarActiveTintColor: '#000000',
+            tabBarShowLabel: false,
+            tabBarActiveTintColor: selectedTheme.colors.primary,
           }}
         >
           <Tab.Screen
-            name="Feed"
+            name="Map"
             component={Test}
             options={{
-              tabBarLabel: 'tab1',
-              tabBarIcon: ({color, size}) => <Icon name="rowing" color={color} size={size} />,
-            }}
-          />
-          <Tab.Screen
-            name="Notifications"
-            component={Test}
-            options={{
-              tabBarLabel: 'tab2',
-              tabBarIcon: ({color, size}) => <Icon name="rowing" color={color} size={size} />,
+              tabBarIcon: ({color, size}) => <Icon type="ionicon" name="map" color={color} size={size} />,
             }}
           />
           <Tab.Screen
             name="Profile"
             component={Test}
             options={{
-              tabBarLabel: 'tab3',
-              tabBarIcon: ({color, size}) => <Icon name="rowing" color={color} size={size} />,
+              tabBarIcon: ({color, size}) => <Icon type="ionicon" name="person" color={color} size={size} />,
             }}
           />
         </Tab.Navigator>
