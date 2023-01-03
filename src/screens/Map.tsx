@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
-import { PermissionsAndroid, StyleSheet, View } from "react-native";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-import { Button, Icon } from "@rneui/themed";
-import { useTheme } from "@react-navigation/native";
-import { LatLng } from "react-native-maps/lib/sharedTypes";
+import React, { useRef, useState } from 'react';
+import { PermissionsAndroid, StyleSheet, View } from 'react-native';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { Button, Icon } from '@rneui/themed';
+import { useTheme } from '@react-navigation/native';
+import { LatLng } from 'react-native-maps/lib/sharedTypes';
 
 const Map = () => {
   const styles = StyleSheet.create({
@@ -15,7 +15,7 @@ const Map = () => {
       height: '100%',
     },
   });
-  const {colors} = useTheme();
+  const { colors } = useTheme();
   const [userLocation, setUserLocation] = useState<LatLng>();
   const [showAsListBtn, setShowAsListBtn] = useState<boolean>(false);
   const requestCameraPermission = async () => {
@@ -66,12 +66,12 @@ const Map = () => {
             setShowAsListBtn(false);
           }
         }}
-        region={{latitude: 51.9, latitudeDelta: 6.24, longitude: 20, longitudeDelta: 5.28}}
+        region={{ latitude: 51.9, latitudeDelta: 6.24, longitude: 20, longitudeDelta: 5.28 }}
         toolbarEnabled={false}
       >
         {/*<Marker coordinate={{latitude: 51.9, longitude: 20}} />*/}
       </MapView>
-      <View style={{position: 'absolute', bottom: 10, right: 10}}>
+      <View style={{ position: 'absolute', bottom: 10, right: 10 }}>
         <Icon
           reverse
           name="locate"
@@ -91,7 +91,7 @@ const Map = () => {
           }}
         />
       </View>
-      <View style={{position: 'absolute', top: 1, right: 10}}>
+      <View style={{ position: 'absolute', top: 1, right: 10 }}>
         <Icon
           reverse
           type="ionicon"
@@ -111,7 +111,7 @@ const Map = () => {
           }}
         />
       </View>
-      <View style={{position: 'absolute', top: 0, left: 55, right: 70, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ position: 'absolute', top: 0, left: 55, right: 70, justifyContent: 'center', alignItems: 'center' }}>
         <Button
           title="Szukaj"
           icon={{
@@ -120,8 +120,8 @@ const Map = () => {
             size: 15,
             color: 'white',
           }}
-          iconContainerStyle={{marginRight: 10}}
-          titleStyle={{fontWeight: '700'}}
+          iconContainerStyle={{ marginRight: 10 }}
+          titleStyle={{ fontWeight: '700' }}
           buttonStyle={{
             backgroundColor: colors.card,
             borderColor: 'transparent',
@@ -136,7 +136,15 @@ const Map = () => {
         />
       </View>
       <View
-        style={{display: showAsListBtn ? 'flex' : 'none', position: 'absolute', bottom: 9, left: 0, right: 0, justifyContent: 'center', alignItems: 'center'}}
+        style={{
+          display: showAsListBtn ? 'flex' : 'none',
+          position: 'absolute',
+          bottom: 9,
+          left: 0,
+          right: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
       >
         <Button
           title="Pokaż liste"
@@ -146,8 +154,8 @@ const Map = () => {
             size: 15,
             color: 'white',
           }}
-          iconContainerStyle={{marginRight: 10}}
-          titleStyle={{fontWeight: '700'}}
+          iconContainerStyle={{ marginRight: 10 }}
+          titleStyle={{ fontWeight: '700' }}
           buttonStyle={{
             backgroundColor: colors.card,
             borderColor: 'transparent',

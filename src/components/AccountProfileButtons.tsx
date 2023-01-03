@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Icon, Text } from '@rneui/themed';
 import { useTheme } from '@react-navigation/native';
+import { AuthContext } from '../../App';
 
 // @ts-ignore
 export const AccountProfileButtons = ({ navigation }) => {
   const { colors } = useTheme();
+  // @ts-ignore
+  const { accessToken, logout } = useContext(AuthContext);
   const styles = StyleSheet.create({
     viewStyle: {
       width: '90%',
@@ -51,9 +54,10 @@ export const AccountProfileButtons = ({ navigation }) => {
   const arrowIconColor = colors.primary;
   const leftIconColor = colors.text;
   const iconSize = 30;
-  if (true) {
-    return (
-      <>
+  // @ts-ignore
+  return (
+    <>
+      {accessToken === null ? (
         <View style={styles.viewStyle}>
           <Button buttonStyle={styles.buttonStyle} onPress={() => navigation.navigate('Login')}>
             <View style={styles.buttonViewStyle}>
@@ -70,11 +74,7 @@ export const AccountProfileButtons = ({ navigation }) => {
             </View>
           </Button>
         </View>
-      </>
-    );
-  } else {
-    return (
-      <>
+      ) : (
         <View style={styles.viewStyle}>
           <Button buttonStyle={styles.buttonStyle}>
             <View style={styles.buttonViewStyle}>
@@ -90,8 +90,20 @@ export const AccountProfileButtons = ({ navigation }) => {
               <Icon name="chevron-forward" type="ionicon" color={arrowIconColor} size={iconSize} style={styles.alignSelfFlexEnd} />
             </View>
           </Button>
+          <Button
+            buttonStyle={styles.buttonStyle}
+            onPress={() => {
+              logout();
+            }}
+          >
+            <View style={styles.buttonViewStyle}>
+              <Icon name="log-out" type="ionicon" color={colors.primary} size={iconSize} style={styles.leftIconStyle} />
+              <Text style={styles.buttonViewTextStyle}>Wyloguj</Text>
+              <Icon name="chevron-forward" type="ionicon" color={arrowIconColor} size={iconSize} style={styles.alignSelfFlexEnd} />
+            </View>
+          </Button>
         </View>
-      </>
-    );
-  }
+      )}
+    </>
+  );
 };
